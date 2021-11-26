@@ -26,6 +26,6 @@ for x in fileList:
 	# will denote a one element tuple for each file name ending with .txt.
 	     c.execute("INSERT INTO tbl_filenames (col_filename) VALUES (?)", (x,))
 	     print(x)
-
+    conn.commit()
 conn.close() #Closes connection to database
     
