@@ -3,7 +3,7 @@ import sqlite3
 conn = sqlite3.connect('filenames.db')
 
 
-with conn: #Upon connection, set cursor and create table and table
+with conn: #Upon connection, set cursor and create table and column
     c = conn.cursor() #sets cursor for connection
     c.execute("CREATE TABLE IF NOT EXISTS tbl_filenames( \
         ID INTEGER PRIMARY KEY AUTOINCREMENT, \
