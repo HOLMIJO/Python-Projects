@@ -7,6 +7,7 @@
 
 import os
 from tkinter import *
+from tkinter import messagebox
 import tkinter as tk
 import sqlite3
 import StudentTrackingMain
@@ -27,7 +28,7 @@ def center_window(self, w, h): # pass in the tkinter frame (master) reference an
 
 # catch if the user's clicks on the windows upper-right 'X' to ensure they want to close
 def ask_quit(self):
-    if messagebox.askokcancel("Exit program", "Okay to exit application?"):
+    if tk.messagebox.askokcancel("Exit program", "Okay to exit application?"):
         # This closes app
         self.master.destroy()
         os._exit(0)
@@ -236,13 +237,13 @@ def onUpdate(self):
                         onClear(self)
                         conn.commit()
                 else:
-                    messagebox.showinfo("Cancel request","No changes have been made to ({}).".format(var_value))
+                    tk.messagebox.showinfo("Cancel request","No changes have been made to ({}).".format(var_value))
             else:
-                messagebox.showinfo("No changes detected","The ({}), (()) and ({}) \nalready exist in the database for this name. \n\nYour update request has been cancelled.".format(var_phone, var_email, var_course))
+                tk.messagebox.showinfo("No changes detected","The ({}), (()) and ({}) \nalready exist in the database for this name. \n\nYour update request has been cancelled.".format(var_phone, var_email, var_course))
             onClear(self)
         conn.close()
     else:
-        messagebox.showerror("Missing information","Please select a name from the list. \nThen edit the phone, email or course information.")
+        tk.messagebox.showerror("Missing information","Please select a name from the list. \nThen edit the phone, email or course information.")
     onClear(self)
 
 
