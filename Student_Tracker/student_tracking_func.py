@@ -96,7 +96,7 @@ def onSelect(self,event):
             self.txt_course.insert(0,data[4])
 
 
-def addToList(self):
+def submit(self):
     var_course = self.txt_course.get()
     var_fname = self.txt_fname.get()
     var_lname = self.txt_lname.get()
