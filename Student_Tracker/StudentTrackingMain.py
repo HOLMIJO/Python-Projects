@@ -20,10 +20,10 @@ class ParentWindow(Frame):
 
         # define our master frame configuration
         self.master = master
-        self.master.minsize(500,300) #(Height, Width)
-        self.master.maxsize(500,300)
+        self.master.minsize(500,325) #(Height, Width)
+        self.master.maxsize(500,325)
         # This CenterWindow method will center our app on the user's screen
-        student_tracking_func.center_window(self,500,300)
+        student_tracking_func.center_window(self,500,325)
         self.master.title("Student Tracking")
         self.master.configure(bg="#F0F0F0")
         # This protocol method is a tkinter built-in method to catch if 
