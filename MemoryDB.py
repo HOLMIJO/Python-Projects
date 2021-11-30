@@ -43,7 +43,8 @@ def SQLite_connection():
                     break
             print (row)
 
-        new_func(conn)
+    new_func(conn)
+    
 
 def new_func(conn):
             finally:
