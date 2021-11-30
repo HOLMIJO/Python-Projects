@@ -1,5 +1,6 @@
+from os import name
 import sqlite3
-from sqlite3 import Error as e
+from sqlite3.dbapi2 import Connection
 
 def SQLite_connection():
     conn = None;
@@ -9,7 +10,7 @@ def SQLite_connection():
         conn = sqlite3.connect(':memory:')
         print("Established database connection to a database\
         that resides in the memory!")
-        cursor_object = connection.cursor()
+        cursor_object = Connection.cursor()
 
         """CREATE TABLE IF NOT EXISTS roster(
                 id integer PRIMARY KEY,
@@ -24,7 +25,7 @@ def SQLite_connection():
         #execute insert statement for supplied person data
         with sqlite3.connect('Roster.db') as connection:
             c = connection.cursor()
-            line = "INSERT INTO roster VALUES ('"+ Name +"', '"+ Species +"', " +str(IQ) +")"
+            line = "INSERT INTO roster VALUES ('"+ name +"', '"+ Species +"', " +str(IQ) +")"
             c.execute(roster)
 
         rosterValues = (('Jean-Baptiste Zorg', 'Human', 122), ('Korben Dallas', 'Meat Popsicle', 100), ('Ak''not', 'Mangalore', -5))
@@ -42,6 +43,12 @@ def SQLite_connection():
                     break
             print (row)
 
-        finally:
-            if conn:
-                conn.close()
+            new_func(conn)
+
+def new_func(conn):
+            finally:
+                if conn:
+                    conn.close()
+
+if __name__ == '__main__':
+    create_connection()
