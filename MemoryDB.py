@@ -1,55 +1,34 @@
-from os import name
 import sqlite3
-from sqlite3.dbapi2 import Connection
 
-def SQLite_connection():
-    conn = None;
-    try:
-        conn = sqlite3.connect('Roster.db')
-        print("Database connection established successfully!")
-        conn = sqlite3.connect(':memory:')
-        print("Established database connection to a database\
-        that resides in the memory!")
-        cursor_object = Connection.cursor()
+rosterValues = (('Jean-Baptiste Zorg', 'Human', 122), ('Korben Dallas', 'Meat Popsicle', 100), ('Ak''not', 'Mangalore', -5))
+        
+#execute insert statement for supplied person data
+with sqlite3.connect('Roster.db') as connection:
+    c = connection.cursor()
+    c.execute("DROP TABLE IF EXISTS roster")
+    c.execute("CREATE TABLE roster(Name TEXT, Species TEXT, IQ INT)")
+    c.executemany("INSERT INTO roster VALUES(?,?,?)", rosterValues)
+    c.execute("UPDATE roster SET Species = ? WHERE IQ = 100", 'Human')
+    c.execute("SELECT Name, IQ FROM roster WHERE Species = Human")
+    for row in c.fetchall():
+        print(row)
 
-        """CREATE TABLE IF NOT EXISTS roster(
-                id integer PRIMARY KEY,
-                name text NOT NULL,
-                species text NOT NULL,
-                iq integer NOT NULL
-        ); """
+    c.execute("SELECT Name, IQ FROM roster WHERE Species = Human")
+    while True:
+        row = c.fetchone()
+        if row is None:
+            break
+# cur = conn.cursor()
+# cur.execute(sql)
+# conn.commit()
 
-        sql = ''' INSERT INTO roster(name,species,iq)
-                    VALUES(?,?,?) '''
+# SQLite_connection()
 
-        #execute insert statement for supplied person data
-        with sqlite3.connect('Roster.db') as connection:
-            c = connection.cursor()
-            line = "INSERT INTO roster VALUES ('"+ name +"', '"+ Species +"', " +str(IQ) +")"
-            c.execute(roster)
+# c.execute("SELECT Name, IQ FROM roster WHERE Species = Human")
+# while True:
+#     row = c.fetchone()
+#     if row is None:
+#             break
+#     print (row)
 
-        rosterValues = (('Jean-Baptiste Zorg', 'Human', 122), ('Korben Dallas', 'Meat Popsicle', 100), ('Ak''not', 'Mangalore', -5))
-
-        cur = conn.cursor()
-        cur.execute(sql)
-        conn.commit()
-
-        SQLite_connection()
-
-        c.execute("SELECT Name, IQ FROM roster WHERE Species = Human")
-        while True:
-            row = c.fetchone()
-            if row is None:
-                    break
-            print (row)
-
-    new_func(conn)
     
-
-def new_func(conn):
-            finally:
-                if conn:
-                    conn.close()
-
-if __name__ == '__main__':
-    create_connection()
