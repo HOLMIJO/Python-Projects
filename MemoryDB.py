@@ -26,12 +26,12 @@ with sqlite3.connect('Roster.db') as conn:
                 cur.execute("INSERT INTO tbl_roster(Name, Species, IQ) VALUES (?,?,?)", \
                             ('Ak''not', 'Mangalore', '-5'))
                 cur = conn.cursor()
-                cur.execute("UPDATE roster SET Species = Human WHERE IQ = 100")
-                cur.execute("SELECT Name, IQ FROM roster WHERE Species = Human")
+                cur.execute("UPDATE roster SET Species = 'Human' WHERE IQ = '100'")
+                cur.execute("SELECT Name, IQ FROM roster WHERE Species = 'Human'")
                 for row in cur.fetchall():
                     print(row)
 
-                cur.execute("SELECT Name, IQ FROM roster WHERE Species = Human")
+                cur.execute("SELECT Name, IQ FROM roster WHERE Species = 'Human'")
                 while True:
                     row = cur.fetchone()
                     if row is None:
