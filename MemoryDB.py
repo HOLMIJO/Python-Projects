@@ -2,7 +2,6 @@ import sqlite3
 
 conn = sqlite3.connect('Roster.db')        
 #execute insert statement for supplied person data
-
 with conn:
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS tbl_roster( \
