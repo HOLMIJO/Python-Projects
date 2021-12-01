@@ -25,8 +25,8 @@ with conn:
 
 with conn:
     cur = conn.cursor()
-    cur.execute("UPDATE roster SET Species = 'Human' WHERE IQ = '100'")
-    cur.execute("SELECT Name, IQ FROM roster WHERE Species = 'Human'")
+    cur.execute("UPDATE tbl_roster SET Species = 'Human' WHERE IQ = '100'")
+    cur.execute("SELECT Name, IQ FROM tbl_roster WHERE Species = 'Human'")
     conn.commit()
 
 conn.close()
