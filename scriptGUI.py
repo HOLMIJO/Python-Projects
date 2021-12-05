@@ -36,21 +36,11 @@ class One( Frame ):
     def close(self):
         self.root.destroy()
         
-
-        
     def submit(self):
         fn1 = self.varFName1.get()
         fn2 = self.varFName2.get()
         self.lblDisplay.config(text='Searching for {} and {}!'.format(fn1,fn2))
         
-
-    
-    
-
-
-
-
-
 if __name__ == '__main__':
     root = Tk()
     App = One(root)
