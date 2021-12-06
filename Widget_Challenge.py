@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import filedialog as fd
 from typing import Optional
-tkinter.filedialog.askdirectory()
+tk.filedialog.askdirectory()
 
 class One( Frame ):
     def __init__( self, master ):
@@ -36,9 +36,9 @@ class One( Frame ):
         self.btnClose.grid(row=5, column=3, padx=(30,0), pady=(10,0), sticky=SE)
 
 
-    def browse_button():
+    def browse_button(self):
         global folder_path
-        filename = filedialog.askdirectory()
+        filename = fd.askdirectory()
         folder_path.set(filename)
         print(filename)
             
