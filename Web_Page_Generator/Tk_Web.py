@@ -2,6 +2,10 @@ import webbrowser
 import os
 from tkinter import *
 
+# Defines Submit function and defines parameters
+# for the HTML to place user determined text
+# and to write said text as the body of HTML file.
+
 
 def Submit():
     text = txtfld.get()
@@ -18,11 +22,8 @@ def Submit():
     # writing code into file
     f.write(html_template)
     f.close()
+    webbrowser.open_new_tab("WebGen.html")
 
-
-filename = 'C://Users//joeho//Dropbox//School//Python-Projects//Web_Page_Generator' + \
-    os.getcwd()+'//' + 'WebGen.html'
-webbrowser.open_new_tab(filename)
 
 window = Tk()  # this is the GUI
 btn = Button(window, text="To confirm body click here",
@@ -30,6 +31,6 @@ btn = Button(window, text="To confirm body click here",
 btn.place(x=80, y=100)
 txtfld = Entry(window, text="", bd=5)
 txtfld.place(x=80, y=150)
-window.title('Web Generator')
+window.title('Web Page Generator')
 window.geometry("300x200+10+10")
 window.mainloop()
