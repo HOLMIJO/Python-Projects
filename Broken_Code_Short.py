@@ -7,20 +7,31 @@ root = Tk()
 root.title('Welcome to File Manager')
 root.geometry("500x350")
 
-# User chooses source directory
+# Allows user to select source folder
 
 
-def select_folder():
-    # ** src is disconnected. Not sure how to attach **
+def chooseSource():
     src = filedialog.askdirectory()
+    # C:\Users\joeho\Desktop\Playground\folderA
+    srcEntry.insert(0, src)
+# Allows user to select destination folder
 
-# User chooses destination directory
+
+def chooseDest():
+    dest = filedialog.askdirectory()
+    # C:\Users\joeho\Desktop\Playground\folderB
+    destEntry.insert(0, dest)
+
+# Checks time modified on files for last 24 hours
+# before preparing to transfer files.
 
 
-def move_to():
-    src = filedialog.askdirectory()
-    dst = filedialog.askdirectory()
-# Sets parameters for the 24 hour window
+def transferFiles():
+    # grabs the source path from srcEntry widget
+    sourcePath = srcEntry.get()
+    # grabs the destination path from destEntry widget
+    destPath = destEntry.get()
+    # Sets parameters for the 24 hour window
     SECONDS_IN_DAY = 24 * 60 * 60
     now = time.time()
     before = now - SECONDS_IN_DAY
@@ -30,17 +41,11 @@ def move_to():
         return os.path.getmtime(fname)
 # Checks to see if file has been modified in 24 hours
 # If files match then move to destination folder
-    for fname in os.listdir(src):
-        src_fname = os.path.join(src, fname)
+    for fname in os.listdir(srcEntry):
+        src_fname = os.path.join(srcEntry, fname)
         if last_mod_time(src_fname) > before:
-            dst_fname = os.path.join(dst, fname)
+            dst_fname = os.path.join(destEntry, fname)
             shutil.move(src_fname, dst_fname)
-
-# Folder list sorts files meeting criteria
-# then prints list
-
-
-def file_check():
     folderList = filedialog.askdirectory()
     sortlist = sorted(os.listdir(folderList))
     i = 0
@@ -50,15 +55,13 @@ def file_check():
         i += 1
 
 
-# Tkinter button for source folder selection
-select_button = Button(root, text="Select Source Folder",
-                       command=select_folder)
-select_button.pack(pady=20)
-# Tkinter button for destination folder selection
-move_button = Button(root, text="Move To Destination Folder", command=move_to)
-move_button.pack(pady=22)
+srcEntry = Entry(root)
+srcEntry.pack(pady=26)
+destEntry = Entry(root)
+destEntry.pack(pady=28)
+
 # Tkinter button to check files in selected source folder
-check_button = Button(root, text="File Check", command=file_check)
+check_button = Button(root, text="File Check", command=transferFiles)
 check_button.pack(pady=24)
 # root mainloop to keep Tkinter alive
 root.mainloop()
