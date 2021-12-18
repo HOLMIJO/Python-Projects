@@ -35,16 +35,18 @@ def transferFiles():
     SECONDS_IN_DAY = 24 * 60 * 60
     now = time.time()
     before = now - SECONDS_IN_DAY
+
+
 # Determines if modified within 24 hours
 
     def last_mod_time(fname):
         return os.path.getmtime(fname)
 # Checks to see if file has been modified in 24 hours
 # If files match then move to destination folder
-    for fname in os.listdir(srcEntry):
-        src_fname = os.path.join(srcEntry, fname)
+    for fname in os.listdir(sourcePath):
+        src_fname = os.path.join(sourcePath, fname)
         if last_mod_time(src_fname) > before:
-            dst_fname = os.path.join(destEntry, fname)
+            dst_fname = os.path.join(destPath, fname)
             shutil.move(src_fname, dst_fname)
     folderList = filedialog.askdirectory()
     sortlist = sorted(os.listdir(folderList))
@@ -60,6 +62,12 @@ srcEntry.pack(pady=26)
 destEntry = Entry(root)
 destEntry.pack(pady=28)
 
+# Button widget for choosing the source folder
+srcButton = Button(root, text="Choose Source Folder", command=chooseSource)
+srcButton.pack(pady=24)
+# Button widget for choosing the destination folder
+destButton = Button(root, text="Choose Destination Folder", command=chooseDest)
+destButton.pack(pady=26)
 # Tkinter button to check files in selected source folder
 check_button = Button(root, text="File Check", command=transferFiles)
 check_button.pack(pady=24)
